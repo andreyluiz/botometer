@@ -7,6 +7,10 @@
     "botometer"
   ],
   "author": "Andrey Luiz <andreyluiz.developer@gmail.com>",
+  "repository": {
+    "type": "GitHub",
+    "url": "git@github.com:andreyluiz/botometer.git"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc"
