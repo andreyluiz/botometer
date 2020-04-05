@@ -2,12 +2,15 @@
   "name": "botometer",
   "version": "1.0.0",
   "description": "A simple and tiny library to get botometer scores.",
-  "main": "dist/botometer.min.js",
+  "main": "index.js",
   "keywords": [
     "botometer"
   ],
   "author": "Andrey Luiz <andreyluiz.developer@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "tslint": "^6.1.1",
     "typescript": "^3.8.3"
