@@ -12,7 +12,13 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/superagent": "^4.1.7",
+    "@types/twitter": "^1.7.0",
     "tslint": "^6.1.1",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "superagent": "^5.2.2",
+    "twitter": "^1.7.1"
   }
 }

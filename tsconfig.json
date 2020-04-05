@@ -5,8 +5,8 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "lib",
-    "sourceMap": true
+    "lib": ["esnext", "dom"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.test.ts"]
 }
