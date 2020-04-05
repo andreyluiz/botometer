@@ -73,4 +73,4 @@ If you get `null` results in your array, set `supressLogs` to false so you can s
 ## Credits
 
 ### Botometer
-My deep thanks to the guys from the [Botometer project](http://botometer.iuni.iu.edu/) from the Observatory on Social Media at Indiana University.
+My deep thanks to the guys from the [Botometer project](http://botometer.iuni.iu.edu/) from the Observatory of Social Media at Indiana University.
