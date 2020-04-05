@@ -1,3 +1,5 @@
+![Build status](https://github.com/andreyluiz/botometer/workflows/Node.js%20CI/badge.svg)
+
 # Botometer
 
 > A simple and tiny library to get botometer scores.
