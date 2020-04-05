@@ -69,3 +69,8 @@ The `console.log` will yield something like:
 ```
 
 If you get `null` results in your array, set `supressLogs` to false so you can see the errors along the process.
+
+## Credits
+
+### Botometer
+My deep thanks to the guys from the [Botometer project](http://botometer.iuni.iu.edu/) from the Observatory on Social Media at Indiana University.
