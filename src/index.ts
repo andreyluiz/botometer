@@ -95,6 +95,7 @@ export class Botometer {
       return twitterData;
     } catch (e) {
       const { code, errorMessage } = this.parseTwitterApiError(e);
+      this.errorLog(e);
       throw new TwitterError(code, errorMessage);
     }
   }
@@ -128,6 +129,7 @@ export class Botometer {
       return res.body;
     } catch (e) {
       const { code, errorMessage } = this.parseBotometerApiError(e);
+      this.errorLog(e);
       throw new BotometerError(code, errorMessage);
     }
   }
