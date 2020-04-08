@@ -2,7 +2,7 @@
   "name": "botometer",
   "version": "1.0.2",
   "description": "A simple and tiny library to get botometer scores.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "keywords": [
     "botometer"
   ],
