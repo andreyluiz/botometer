@@ -160,4 +160,18 @@ export class Botometer {
     }
     return scores;
   }
+
+  async getScore(name: string) {
+    const result = await this.getScoreFor(name);
+    return result;
+  }
+
+  async *getScoresGenerator(names: string[]) {
+    for (const name of names) {
+      this.log(`Getting bot score for "${name}"`);
+
+      const result = await this.getScoreFor(name);
+      yield result;
+    }
+  }
 }
