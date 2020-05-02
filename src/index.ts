@@ -10,6 +10,7 @@ export interface BotometerOptions {
   accessTokenSecret: string;
   rapidApiKey: string;
   supressLogs?: boolean;
+  usePro?: boolean;
 }
 
 interface TwitterData {
@@ -25,6 +26,7 @@ const defaultValues: BotometerOptions = {
   accessTokenSecret: null,
   rapidApiKey: null,
   supressLogs: true,
+  usePro: false,
 };
 
 export class Botometer {
@@ -118,11 +120,14 @@ export class Botometer {
   }
 
   async checkAccount(twitterData: TwitterData) {
+    const endpoint = this.options.usePro
+      ? "botometer-pro.p.rapidapi.com"
+      : "osome-botometer.p.rapidapi.com";
     try {
       const res = await request
-        .post("https://osome-botometer.p.rapidapi.com/2/check_account")
+        .post(`https://${endpoint}/2/check_account`)
         .send(twitterData)
-        .set("x-rapidapi-host", "osome-botometer.p.rapidapi.com")
+        .set("x-rapidapi-host", endpoint)
         .set("x-rapidapi-key", this.options.rapidApiKey)
         .set("content-type", "application/json")
         .set("accept", "application/json");
