@@ -3,6 +3,8 @@ import TwitterError from "./TwitterError";
 import * as Twitter from "twitter";
 import * as request from "superagent";
 
+const FIFTEEN_MINUTES = 1000 * 60 * 15;
+
 export interface BotometerOptions {
   consumerKey: string;
   consumerSecret: string;
@@ -11,6 +13,7 @@ export interface BotometerOptions {
   rapidApiKey: string;
   supressLogs?: boolean;
   usePro?: boolean;
+  waitOnRateLimit?: boolean;
 }
 
 interface TwitterData {
@@ -27,6 +30,7 @@ const defaultValues: BotometerOptions = {
   rapidApiKey: null,
   supressLogs: true,
   usePro: false,
+  waitOnRateLimit: true,
 };
 
 export class Botometer {
@@ -140,13 +144,25 @@ export class Botometer {
   }
 
   async getScoreFor(name: string): Promise<any> {
+    this.log(`Getting bot score for "${name}"`);
+    let twitterData = null;
     try {
-      const twitterData = await this.getTwitterData(name);
-
-      if (!twitterData) {
-        return null;
+      twitterData = await this.getTwitterData(name);
+    } catch (e) {
+      if (e.code === 88 && this.options.waitOnRateLimit) {
+        this.log("Rate limit reached. Waiting...");
+        setTimeout(async () => {
+          this.log("Rate limit timeout ended. Continuing...");
+          twitterData = await this.getTwitterData(name);
+        }, FIFTEEN_MINUTES);
       }
+    }
 
+    if (!twitterData) {
+      return null;
+    }
+
+    try {
       const botometerData = await this.checkAccount(twitterData);
       return botometerData;
     } catch (e) {
@@ -158,8 +174,6 @@ export class Botometer {
   async getScores(names: string[]) {
     const scores = [];
     for (const name of names) {
-      this.log(`Getting bot score for "${name}"`);
-
       const result = await this.getScoreFor(name);
       scores.push(result);
     }
@@ -173,8 +187,6 @@ export class Botometer {
 
   async *getScoresGenerator(names: string[]) {
     for (const name of names) {
-      this.log(`Getting bot score for "${name}"`);
-
       const result = await this.getScoreFor(name);
       yield result;
     }
