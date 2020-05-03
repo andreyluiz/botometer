@@ -5,6 +5,11 @@ import * as request from "superagent";
 
 const FIFTEEN_MINUTES = 1000 * 60 * 15;
 
+const delay = (ms: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+
 export interface BotometerOptions {
   consumerKey: string;
   consumerSecret: string;
@@ -96,8 +101,6 @@ export class Botometer {
         count: 100,
       });
       twitterData.mentions = mentions;
-      // console.log("Twitter data");
-      // console.log(twitterData);
       return twitterData;
     } catch (e) {
       const { code, errorMessage } = this.parseTwitterApiError(e);
@@ -150,11 +153,16 @@ export class Botometer {
       twitterData = await this.getTwitterData(name);
     } catch (e) {
       if (e.code === 88 && this.options.waitOnRateLimit) {
-        this.log("Rate limit reached. Waiting...");
-        setTimeout(async () => {
-          this.log("Rate limit timeout ended. Continuing...");
+        this.log("Rate limit reached. Waiting 15 minutes...");
+        await delay(FIFTEEN_MINUTES);
+        this.log("Rate limit timeout ended. Continuing...");
+        try {
           twitterData = await this.getTwitterData(name);
-        }, FIFTEEN_MINUTES);
+        } catch (e) {
+          this.errorLog(e);
+        }
+      } else {
+        this.errorLog(e);
       }
     }
 
