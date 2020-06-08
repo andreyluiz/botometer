@@ -160,14 +160,12 @@ export class Botometer {
           twitterData = await this.getTwitterData(name);
         } catch (e) {
           this.errorLog(e);
+          return { error: e };
         }
       } else {
         this.errorLog(e);
+        return { error: e };
       }
-    }
-
-    if (!twitterData) {
-      return null;
     }
 
     try {
@@ -175,7 +173,7 @@ export class Botometer {
       return botometerData;
     } catch (e) {
       this.errorLog(e);
-      return null;
+      return { error: e };
     }
   }
 
