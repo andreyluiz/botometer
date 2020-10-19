@@ -19,6 +19,7 @@ export interface BotometerOptions {
   supressLogs?: boolean;
   usePro?: boolean;
   waitOnRateLimit?: boolean;
+  returnTwitterData?: boolean;
 }
 
 interface TwitterData {
@@ -36,6 +37,7 @@ const defaultValues: BotometerOptions = {
   supressLogs: true,
   usePro: false,
   waitOnRateLimit: true,
+  returnTwitterData: false,
 };
 
 export class Botometer {
@@ -170,7 +172,10 @@ export class Botometer {
 
     try {
       const botometerData = await this.checkAccount(twitterData);
-      return botometerData;
+      return {
+        ...botometerData,
+        twitterData,
+      }
     } catch (e) {
       this.errorLog(e);
       return { error: e };
