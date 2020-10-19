@@ -132,7 +132,7 @@ export class Botometer {
       : "osome-botometer.p.rapidapi.com";
     try {
       const res = await request
-        .post(`https://${endpoint}/2/check_account`)
+        .post(`https://${endpoint}/4/check_account`)
         .send(twitterData)
         .set("x-rapidapi-host", endpoint)
         .set("x-rapidapi-key", this.options.rapidApiKey)
