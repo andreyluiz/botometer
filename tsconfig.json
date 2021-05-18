@@ -4,6 +4,7 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
+    "declaration": true,         /* Generates corresponding '.d.ts' file. */
     "outDir": "lib",
     "lib": ["esnext", "dom"]
   },
