@@ -3,6 +3,7 @@
   "version": "1.0.12",
   "description": "A simple and tiny library to get botometer scores.",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "keywords": [
     "botometer"
   ],
